@@ -1,8 +1,10 @@
 # ChildViewController
-<center>How to add expandable a child view controller to another UIViewController</center>
+## How to add expandable a child view controller to another UIViewController
 
-
-![alt text](https://github.com/kasrababaei/ChildViewController/blob/master/childviewcontroller.gif "Child view controller")
+<p align="center">
+  Preview
+  ![alt text](https://github.com/kasrababaei/ChildViewController/blob/master/childviewcontroller.gif "Child view controller")
+</p>
 
 This XCode project is inspired by the following video from **Brian Advent**: https://www.youtube.com/watch?v=L-f1KSPKm4I 
 
