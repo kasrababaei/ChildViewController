@@ -3,7 +3,7 @@
 
 
 <p align="center">
-  <img src="https://i.ibb.co/tptTf5n/childviewcontroller.gif" alt="childviewcontroller" border="0">
+  <img src="https://github.com/kasrababaei/ChildViewController/blob/master/childviewcontroller.gif" alt="childviewcontroller" border="0">
 </p>
 
 This XCode project is inspired by the following video from **Brian Advent**: https://www.youtube.com/watch?v=L-f1KSPKm4I 
