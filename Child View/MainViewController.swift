@@ -75,7 +75,18 @@ class MainViewController: UIViewController {
             }
             
             frameAnimator.addCompletion { (_) in
-                self.childVisible = !self.childVisible
+                if frameAnimator.isReversed {
+                    switch state {
+                    case .collapsed:
+                        self.childViewControllerHeightAnchor?.constant = self.childHeight
+                        self.view.layoutIfNeeded()
+                    case .expanded:
+                        self.childViewControllerHeightAnchor?.constant = self.childHandleAreaHeight
+                        self.view.layoutIfNeeded()
+                    }
+                } else {
+                    self.childVisible = !self.childVisible
+                }
                 self.runningAnimations.removeAll()
             }
             
@@ -129,10 +140,19 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func continueInteractiveTransition() {
-        for animator in runningAnimations {
-            // durationFactor = 0 : use whatever duration is left to finish the animation
-            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+    private func continueInteractiveTransition(fraction complete: CGFloat) {
+        if complete > 0.4 {
+            for animator in runningAnimations {
+                // durationFactor = 0 : use whatever duration is left to finish the animation
+                animator.isReversed = false
+                animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            }
+        } else {
+            for animator in runningAnimations {
+                // reverse the animation
+                animator.isReversed = true
+                animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            }
         }
     }
     
@@ -158,7 +178,10 @@ class MainViewController: UIViewController {
             fractionComplete = childVisible ? fractionComplete : -fractionComplete
             updateInteractiveTransition(fraction: fractionComplete)
         case .ended:
-            continueInteractiveTransition()
+            let translation = sender.translation(in: self.childViewController.handleView)
+            var fractionComplete = translation.y / childHeight
+            fractionComplete = childVisible ? fractionComplete : -fractionComplete
+            continueInteractiveTransition(fraction: fractionComplete)
         default:
             break
         }
