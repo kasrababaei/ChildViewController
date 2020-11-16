@@ -1,4 +1,4 @@
-# ChildViewController
+# Sliding view controller
 <p align=center> How to add an expandable child view controller to another UIViewController </p>
 
 
